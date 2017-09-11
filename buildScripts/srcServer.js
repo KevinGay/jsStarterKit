@@ -1,5 +1,5 @@
 /**
- * Created by kmg_paintballer on 9/6/17.
+ * Created by Kevin Gay on 9/6/17.
  */
 
 // To run on localtunnel (pokes hole in firewall to allow your computer to act as a web server for a single application:
@@ -17,13 +17,29 @@
 // its input and produce the equivalent source code in another language.
 // There are over 100 transpilers that compile down to JavaScript.
 
+// A js bundler is a tool that puts your code and all dependencies into one js file so browsers can user npm packages
+// Webpack bundles css, fonts, images, and allows bundle splitting, where users can download different modules depending
+// on which portion of the app they're using
 
-var express = require('express');
-var path = require('path');
-var open = require('open');
+// ES6 (ES2017) should be used in current projects because it's standardized.
 
-var port = 3000;
-var app = express();
+// To debug transpiled code, use sourcemaps. Sourcemaps code back to original source.
+// Only downloaded if you open developer tools
+
+import express from 'express';
+import path from 'path';
+import open from 'open';
+import webpack from 'webpack';
+import config from '../webpack.config.dev';
+
+const port = 3000;
+const app = express();
+const compiler = webpack(config);
+
+app.use(require('webpack-dev-middleware')(compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPath
+}));
 
 //When root is requested, send the index.html file.
 app.get('/', function(req, res) {
