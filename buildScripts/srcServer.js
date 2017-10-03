@@ -26,11 +26,23 @@
 // To debug transpiled code, use sourcemaps. Sourcemaps code back to original source.
 // Only downloaded if you open developer tools
 
+// Linting: parses code and looks for mistakes before runtime
+// "lint": "esw webpack.config.* src buildScripts --color" in package.json tells eslint watch to watch the given dirs
+
+// Unit tests should run when you hit save
+// Integration tests sould run on demand, or in QA
+// For this project, mocha for tests, chai for assertion library, JSDOM for helper library
+
+// Continuous integration makes sure that the app runs on all platforms. Having a CI server
+//  keeps everything standard. TravisCI is a popular integration server that functions with github.
+
 import express from 'express';
 import path from 'path';
 import open from 'open';
 import webpack from 'webpack';
 import config from '../webpack.config.dev';
+
+/* eslint-disable no-console */
 
 const port = 3000;
 const app = express();
@@ -49,7 +61,7 @@ app.get('/', function(req, res) {
 //open app on the specified port
 app.listen(port, function(err) {
     if (err) {
-        console.log(error)
+        console.log(err)
     }
     else {
         open('http://localhost:' + port);

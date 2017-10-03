@@ -13,4 +13,4 @@ const courseValue = numeral(1000).format('$0,0.00');
 //debugger;
 
 // Note: Template strings (ES6) use back-ticks (``) rather than single quotes!!
-console.log(`I would pay ${courseValue} for this awesome course!`);
+console.log(`I would pay ${courseValue} for this awesome course!`); //eslint-disable-line no-console
